@@ -26,7 +26,7 @@ const App: React.FC = () => {
                     } 
                 />
                 <Route path="/login" element={<Login />} />
-                <Route path="/signin" element={<SignIn />} />
+                <Route path="signin" element={<SignIn />} />
             </Routes>
         </BrowserRouter>
     )
