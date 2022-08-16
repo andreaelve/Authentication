@@ -1,15 +1,34 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import Login from "./pages/Login";
+import SignIn from "./pages/Singin";
+import Home from "./pages/Home";
+import {
+    BrowserRouter,
+    Routes,
+    Route,
+} from "react-router-dom";
+import { initializeApp } from "firebase/app";
+import { config } from "./config/firebase";
+import AuthRoute from "./components/AuthRoute";
+
+initializeApp(config.firebaseConfig);
 
 const App: React.FC = () => {
     return (
-    <>
-        <h1>TypeScript is awesome</h1>
-        <nav>
-            <Link to="/login">Login</Link> |{" "}
-            <Link to="/signin">Signin</Link>
-        </nav>
-    </>
+        <BrowserRouter>
+            <Routes>
+                <Route 
+                    path="/" 
+                    element={
+                        <AuthRoute>
+                            <Home />
+                        </AuthRoute>
+                    } 
+                />
+                <Route path="/login" element={<Login />} />
+                <Route path="/signin" element={<SignIn />} />
+            </Routes>
+        </BrowserRouter>
     )
 };
 
