@@ -16,11 +16,10 @@ const Home: React.FC = () => {
         if(user){
             deleteUser(user)
             .then(() => {
-                // User deleted.
+                navigate('/');
             })
             .catch((error) => {
-                // An error ocurred
-                // ...
+                console.log(error.errorCode, error.errorMessage);
             });
         } 
     }

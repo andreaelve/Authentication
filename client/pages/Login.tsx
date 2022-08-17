@@ -11,11 +11,9 @@ const Login: React.FC = () => {
 
     useEffect(() => {
         onAuthStateChanged(auth, (user) => {
-            console.log('user', user)
             if(user) {
                 navigate('/');
             } else {
-                console.log('unauthorized 2');
             }
         });
     }, [auth]);

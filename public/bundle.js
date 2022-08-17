@@ -47672,11 +47672,10 @@ const Home = () => {
         if (user) {
             (0, auth_1.deleteUser)(user)
                 .then(() => {
-                // User deleted.
+                navigate('/');
             })
                 .catch((error) => {
-                // An error ocurred
-                // ...
+                console.log(error.errorCode, error.errorMessage);
             });
         }
     };
@@ -47731,12 +47730,10 @@ const Login = () => {
     const passwordRef = (0, react_1.useRef)(null);
     (0, react_1.useEffect)(() => {
         (0, auth_1.onAuthStateChanged)(auth, (user) => {
-            console.log('user', user);
             if (user) {
                 navigate('/');
             }
             else {
-                console.log('unauthorized 2');
             }
         });
     }, [auth]);
