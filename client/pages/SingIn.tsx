@@ -43,7 +43,8 @@ const SignIn: React.FC = () => {
         }
 
         if(isEmail && correctPassword) {
-            console.log('tiptop')
+            console.log('tiptop');
+            // Adding a comment to check something
         }
 
         return true;
