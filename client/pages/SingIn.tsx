@@ -57,8 +57,6 @@ const SignIn: React.FC = () => {
                     console.log(errorCode, errorMessage);
                 });
         }
-
-        return true;
     }
 
     return (

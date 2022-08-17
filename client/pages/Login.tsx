@@ -1,16 +1,41 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useRef } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 
 const Login: React.FC = () => {
+    const auth = getAuth();
+    const navigate = useNavigate();
+
+    const emailRef = useRef<HTMLInputElement>(null);
+    const passwordRef = useRef<HTMLInputElement>(null);
+
+    const handleLogin = (e: React.FormEvent<HTMLInputElement>|React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+        e.preventDefault();
+        const email = emailRef.current?.value;
+        const password = passwordRef.current?.value;
+        signInWithEmailAndPassword(auth, email!, password!)
+        .then((userCredential) => {
+            console.log('signing in');
+            const user = userCredential.user;
+            console.log(user);
+            navigate('/');
+        })
+        .catch((error) => {
+            const errorCode = error.code;
+            const errorMessage = error.message;
+            console.log(errorCode, errorMessage);
+        });
+    }
+
     return (
         <main>
             <h1>Welcome back!</h1>
             <p>Please enter your details.</p>
             <div className="card">
                 <form>
-                    <input type="text" id="email" placeholder="e-mail"></input>
-                    <input type="password" id="password" placeholder="password"></input>
-                    <button className="login-btn">Log in</button>
+                    <input ref={emailRef} type="text" id="email" placeholder="e-mail"></input>
+                    <input ref={passwordRef} type="password" id="password" placeholder="password"></input>
+                    <button className="login-btn" onClick={handleLogin}>Log in</button>
                     <span>---------or---------</span>
                     <button>Log in with Google</button>
                 </form>
