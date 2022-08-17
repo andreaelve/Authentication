@@ -47734,6 +47734,7 @@ const react_router_dom_1 = __webpack_require__(/*! react-router-dom */ "./node_m
 const auth_1 = __webpack_require__(/*! firebase/auth */ "./node_modules/firebase/auth/dist/index.esm.js");
 const SignIn = () => {
     const auth = (0, auth_1.getAuth)();
+    const navigate = (0, react_router_dom_1.useNavigate)();
     const name = (0, react_1.useRef)(null);
     const emailRef = (0, react_1.useRef)(null);
     const password1Ref = (0, react_1.useRef)(null);
@@ -47770,7 +47771,18 @@ const SignIn = () => {
         }
         if (isEmail && correctPassword) {
             console.log('tiptop');
-            // Adding a comment to check something
+            (0, auth_1.createUserWithEmailAndPassword)(auth, email, password1)
+                .then((userCredential) => {
+                console.log('signed up');
+                const user = userCredential.user;
+                console.log('user', user);
+                navigate('/');
+            })
+                .catch((error) => {
+                const errorCode = error.code;
+                const errorMessage = error.message;
+                console.log(errorCode, errorMessage);
+            });
         }
         return true;
     };

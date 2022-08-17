@@ -1,10 +1,10 @@
 import React, { useRef } from "react";
-import { Link } from "react-router-dom";
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
-import test from "node:test";
+import { Link, useNavigate } from "react-router-dom";
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 
 const SignIn: React.FC = () => {
     const auth = getAuth();
+    const navigate = useNavigate();
 
     const name = useRef<HTMLInputElement>(null);
     const emailRef = useRef<HTMLInputElement>(null);
@@ -44,7 +44,18 @@ const SignIn: React.FC = () => {
 
         if(isEmail && correctPassword) {
             console.log('tiptop');
-            // Adding a comment to check something
+            createUserWithEmailAndPassword(auth, email!, password1!)
+                .then((userCredential) => {
+                    console.log('signed up')
+                    const user = userCredential.user;
+                    console.log('user', user);
+                    navigate('/');
+                })
+                .catch((error) => {
+                    const errorCode = error.code;
+                    const errorMessage = error.message;
+                    console.log(errorCode, errorMessage);
+                });
         }
 
         return true;
