@@ -47562,13 +47562,10 @@ const AuthRoute = props => {
         authCheck();
     }, [auth]);
     const authCheck = (0, auth_1.onAuthStateChanged)(auth, (user) => {
-        console.log('user', user);
         if (user) {
-            console.log('authorized');
             setLoading(false);
         }
         else {
-            console.log('unauthorized');
             navigate('/login');
         }
     });
@@ -47666,15 +47663,27 @@ const react_router_dom_1 = __webpack_require__(/*! react-router-dom */ "./node_m
 const Home = () => {
     const auth = (0, auth_1.getAuth)();
     const navigate = (0, react_router_dom_1.useNavigate)();
-    console.log('inside');
     const handleLogout = () => {
         auth.signOut();
         navigate('/');
     };
+    const handleDelete = () => {
+        const user = auth.currentUser;
+        if (user) {
+            (0, auth_1.deleteUser)(user)
+                .then(() => {
+                // User deleted.
+            })
+                .catch((error) => {
+                // An error ocurred
+                // ...
+            });
+        }
+    };
     return (react_1.default.createElement("main", null,
         react_1.default.createElement("h1", null, "Home page!"),
         react_1.default.createElement("button", { onClick: handleLogout }, "Log out"),
-        react_1.default.createElement("button", null, "Delete account")));
+        react_1.default.createElement("button", { onClick: handleDelete }, "Delete account")));
 };
 exports["default"] = Home;
 
