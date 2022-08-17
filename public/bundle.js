@@ -47557,16 +47557,20 @@ const AuthRoute = props => {
     const { children } = props;
     const auth = (0, auth_1.getAuth)();
     const navigate = (0, react_router_dom_1.useNavigate)();
-    const [loading, setLoading] = (0, react_1.useState)(false);
+    const [loading, setLoading] = (0, react_1.useState)(true);
     (0, react_2.useEffect)(() => {
         authCheck();
     }, [auth]);
     const authCheck = (0, auth_1.onAuthStateChanged)(auth, (user) => {
+        console.log('user', user);
         if (user) {
+            console.log('authorized');
             setLoading(false);
         }
-        console.log('unauthorized');
-        navigate('/login');
+        else {
+            console.log('unauthorized');
+            navigate('/login');
+        }
     });
     if (loading)
         react_1.default.createElement("p", null, "Loading...");
@@ -47656,11 +47660,20 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
+const auth_1 = __webpack_require__(/*! firebase/auth */ "./node_modules/firebase/auth/dist/index.esm.js");
 const react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+const react_router_dom_1 = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/index.js");
 const Home = () => {
+    const auth = (0, auth_1.getAuth)();
+    const navigate = (0, react_router_dom_1.useNavigate)();
+    console.log('inside');
+    const handleLogout = () => {
+        auth.signOut();
+        navigate('/');
+    };
     return (react_1.default.createElement("main", null,
         react_1.default.createElement("h1", null, "Home page!"),
-        react_1.default.createElement("button", null, "Log out"),
+        react_1.default.createElement("button", { onClick: handleLogout }, "Log out"),
         react_1.default.createElement("button", null, "Delete account")));
 };
 exports["default"] = Home;
@@ -47707,6 +47720,17 @@ const Login = () => {
     const navigate = (0, react_router_dom_1.useNavigate)();
     const emailRef = (0, react_1.useRef)(null);
     const passwordRef = (0, react_1.useRef)(null);
+    (0, react_1.useEffect)(() => {
+        (0, auth_1.onAuthStateChanged)(auth, (user) => {
+            console.log('user', user);
+            if (user) {
+                navigate('/');
+            }
+            else {
+                console.log('unauthorized 2');
+            }
+        });
+    }, [auth]);
     const handleLogin = (e) => {
         var _a, _b;
         e.preventDefault();
@@ -47716,8 +47740,7 @@ const Login = () => {
             .then((userCredential) => {
             console.log('signing in');
             const user = userCredential.user;
-            console.log(user);
-            navigate('/');
+            console.log('logger inn:', user);
         })
             .catch((error) => {
             const errorCode = error.code;

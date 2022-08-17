@@ -1,6 +1,6 @@
-import React, { useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { getAuth, onAuthStateChanged, signInWithEmailAndPassword } from "firebase/auth";
 
 const Login: React.FC = () => {
     const auth = getAuth();
@@ -8,6 +8,17 @@ const Login: React.FC = () => {
 
     const emailRef = useRef<HTMLInputElement>(null);
     const passwordRef = useRef<HTMLInputElement>(null);
+
+    useEffect(() => {
+        onAuthStateChanged(auth, (user) => {
+            console.log('user', user)
+            if(user) {
+                navigate('/');
+            } else {
+                console.log('unauthorized 2');
+            }
+        });
+    }, [auth]);
 
     const handleLogin = (e: React.FormEvent<HTMLInputElement>|React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         e.preventDefault();
@@ -17,8 +28,7 @@ const Login: React.FC = () => {
         .then((userCredential) => {
             console.log('signing in');
             const user = userCredential.user;
-            console.log(user);
-            navigate('/');
+            console.log('logger inn:', user);
         })
         .catch((error) => {
             const errorCode = error.code;

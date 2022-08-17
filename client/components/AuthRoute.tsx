@@ -11,18 +11,21 @@ const AuthRoute: React.FC<Props> = props => {
     const { children } = props;
     const auth = getAuth();
     const navigate = useNavigate();
-    const [loading, setLoading] = useState(false);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         authCheck();
     }, [auth]);
 
     const authCheck = onAuthStateChanged(auth, (user) => {
+        console.log('user', user)
         if(user) {
+            console.log('authorized')
             setLoading(false);
+        } else {
+            console.log('unauthorized');
+            navigate('/login');
         }
-        console.log('unauthorized');
-        navigate('/login');
     });
 
     if(loading) <p>Loading...</p>;
