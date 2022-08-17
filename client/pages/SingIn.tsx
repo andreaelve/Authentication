@@ -60,7 +60,6 @@ const SignIn: React.FC = () => {
     }
 
     return (
-        <>
             <main>
                 <h1>Create an account</h1>
                 <p className="details">Please enter your details.</p>
@@ -72,12 +71,11 @@ const SignIn: React.FC = () => {
                         <input ref={password2Ref} type="password" id="password2" placeholder="verify password"></input>
                         <button className="signup-btn" onClick={e => handleSignUp(e)}>Create account</button>
                         <span>--------- or ---------</span>
-                        <button>Sign up with Google (not implemented)</button>
+                        <button>Sign up with Google (not working)</button>
                     </form>
                 </div>
                 <p className="toggle-link-line">Already have an account? <Link to="/login">Log in</Link></p>
             </main>
-        </>
         );
     };
     export default SignIn;

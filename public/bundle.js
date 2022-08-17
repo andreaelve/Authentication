@@ -47860,22 +47860,21 @@ const SignIn = () => {
             });
         }
     };
-    return (react_1.default.createElement(react_1.default.Fragment, null,
-        react_1.default.createElement("main", null,
-            react_1.default.createElement("h1", null, "Create an account"),
-            react_1.default.createElement("p", { className: "details" }, "Please enter your details."),
-            react_1.default.createElement("div", { className: "card" },
-                react_1.default.createElement("form", null,
-                    react_1.default.createElement("input", { ref: name, type: "text", id: "name", placeholder: "name" }),
-                    react_1.default.createElement("input", { ref: emailRef, type: "text", id: "email", placeholder: "e-mail" }),
-                    react_1.default.createElement("input", { ref: password1Ref, type: "password", id: "password1", placeholder: "password" }),
-                    react_1.default.createElement("input", { ref: password2Ref, type: "password", id: "password2", placeholder: "verify password" }),
-                    react_1.default.createElement("button", { className: "signup-btn", onClick: e => handleSignUp(e) }, "Create account"),
-                    react_1.default.createElement("span", null, "--------- or ---------"),
-                    react_1.default.createElement("button", null, "Sign up with Google (not implemented)"))),
-            react_1.default.createElement("p", { className: "toggle-link-line" },
-                "Already have an account? ",
-                react_1.default.createElement(react_router_dom_1.Link, { to: "/login" }, "Log in")))));
+    return (react_1.default.createElement("main", null,
+        react_1.default.createElement("h1", null, "Create an account"),
+        react_1.default.createElement("p", { className: "details" }, "Please enter your details."),
+        react_1.default.createElement("div", { className: "card" },
+            react_1.default.createElement("form", null,
+                react_1.default.createElement("input", { ref: name, type: "text", id: "name", placeholder: "name" }),
+                react_1.default.createElement("input", { ref: emailRef, type: "text", id: "email", placeholder: "e-mail" }),
+                react_1.default.createElement("input", { ref: password1Ref, type: "password", id: "password1", placeholder: "password" }),
+                react_1.default.createElement("input", { ref: password2Ref, type: "password", id: "password2", placeholder: "verify password" }),
+                react_1.default.createElement("button", { className: "signup-btn", onClick: e => handleSignUp(e) }, "Create account"),
+                react_1.default.createElement("span", null, "--------- or ---------"),
+                react_1.default.createElement("button", null, "Sign up with Google (not working)"))),
+        react_1.default.createElement("p", { className: "toggle-link-line" },
+            "Already have an account? ",
+            react_1.default.createElement(react_router_dom_1.Link, { to: "/login" }, "Log in"))));
 };
 exports["default"] = SignIn;
 
