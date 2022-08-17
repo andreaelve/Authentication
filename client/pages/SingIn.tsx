@@ -71,11 +71,11 @@ const SignIn: React.FC = () => {
                         <input ref={password1Ref} type="password" id="password1" placeholder="password"></input>
                         <input ref={password2Ref} type="password" id="password2" placeholder="verify password"></input>
                         <button className="signup-btn" onClick={e => handleSignUp(e)}>Create account</button>
-                        <span>---------or---------</span>
-                        <button>Sign up with Google</button>
+                        <span>--------- or ---------</span>
+                        <button>Sign up with Google (not implemented)</button>
                     </form>
                 </div>
-                <p>Already have an account? <Link to="/login">Log in</Link></p>
+                <p className="toggle-link-line">Already have an account? <Link to="/login">Log in</Link></p>
             </main>
         </>
         );

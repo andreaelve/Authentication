@@ -47762,10 +47762,10 @@ const Login = () => {
                 react_1.default.createElement("input", { ref: emailRef, type: "text", id: "email", placeholder: "e-mail" }),
                 react_1.default.createElement("input", { ref: passwordRef, type: "password", id: "password", placeholder: "password" }),
                 react_1.default.createElement("button", { className: "login-btn", onClick: handleLogin }, "Log in"),
-                react_1.default.createElement("span", null, "---------or---------"),
-                react_1.default.createElement("button", null, "Log in with Google"))),
-        react_1.default.createElement("p", null,
-            "Don\u2019t have an account yet? ",
+                react_1.default.createElement("span", null, "--------- or ---------"),
+                react_1.default.createElement("button", null, "Log in with Google (not working)"))),
+        react_1.default.createElement("p", { className: "toggle-link-line" },
+            "Don't have an account yet? ",
             react_1.default.createElement(react_router_dom_1.Link, { to: "/signin" }, "Sign up"))));
 };
 exports["default"] = Login;
@@ -47871,9 +47871,9 @@ const SignIn = () => {
                     react_1.default.createElement("input", { ref: password1Ref, type: "password", id: "password1", placeholder: "password" }),
                     react_1.default.createElement("input", { ref: password2Ref, type: "password", id: "password2", placeholder: "verify password" }),
                     react_1.default.createElement("button", { className: "signup-btn", onClick: e => handleSignUp(e) }, "Create account"),
-                    react_1.default.createElement("span", null, "---------or---------"),
-                    react_1.default.createElement("button", null, "Sign up with Google"))),
-            react_1.default.createElement("p", null,
+                    react_1.default.createElement("span", null, "--------- or ---------"),
+                    react_1.default.createElement("button", null, "Sign up with Google (not implemented)"))),
+            react_1.default.createElement("p", { className: "toggle-link-line" },
                 "Already have an account? ",
                 react_1.default.createElement(react_router_dom_1.Link, { to: "/login" }, "Log in")))));
 };

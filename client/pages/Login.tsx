@@ -44,11 +44,11 @@ const Login: React.FC = () => {
                     <input ref={emailRef} type="text" id="email" placeholder="e-mail"></input>
                     <input ref={passwordRef} type="password" id="password" placeholder="password"></input>
                     <button className="login-btn" onClick={handleLogin}>Log in</button>
-                    <span>---------or---------</span>
-                    <button>Log in with Google</button>
+                    <span>--------- or ---------</span>
+                    <button>Log in with Google (not working)</button>
                 </form>
             </div>
-            <p>Don’t have an account yet? <Link to="/signin">Sign up</Link></p>
+            <p className="toggle-link-line">Don't have an account yet? <Link to="/signin">Sign up</Link></p>
         </main>
     );
 };
