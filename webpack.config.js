@@ -1,6 +1,7 @@
 const dotenv = require("dotenv");
 dotenv.config();
 const path = require("path");
+const { SourceMapDevToolPlugin } = require("webpack");
 
 module.exports = {
   entry: "./client/index.tsx",
@@ -8,7 +9,7 @@ module.exports = {
     rules: [
       {
         test: /\.tsx?$/,
-        use: "ts-loader",
+        use: ["ts-loader", "source-map-loader"],
         exclude: /node_modules/,
       },
     ],
@@ -21,4 +22,10 @@ module.exports = {
     filename: "bundle.js",
     path: path.resolve(__dirname, "public"),
   },
+  devtool: "source-map",
+  plugins: [
+    new SourceMapDevToolPlugin({
+      filename: "[file].map"
+    })
+  ]
 };

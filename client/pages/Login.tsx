@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 const Login: React.FC = () => {
     return (
-        <>
+        <main>
             <h1>Welcome back!</h1>
             <p>Please enter your details.</p>
             <div className="card">
@@ -16,7 +16,7 @@ const Login: React.FC = () => {
                 </form>
             </div>
             <p>Don’t have an account yet? <Link to="/signin">Sign up</Link></p>
-        </>
+        </main>
     );
 };
 
