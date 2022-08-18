@@ -47729,6 +47729,7 @@ const Login = () => {
     const navigate = (0, react_router_dom_1.useNavigate)();
     const emailRef = (0, react_1.useRef)(null);
     const passwordRef = (0, react_1.useRef)(null);
+    const formRef = (0, react_1.useRef)(null);
     (0, react_1.useEffect)(() => {
         (0, auth_1.onAuthStateChanged)(auth, (user) => {
             if (user) {
@@ -47746,16 +47747,17 @@ const Login = () => {
         (0, auth_1.signInWithEmailAndPassword)(auth, email, password)
             .then(userCredential => {
             const user = userCredential.user;
+            formRef.current.className = '';
         })
             .catch(error => {
+            formRef.current.className = 'wrong-login';
             const errorCode = error.code;
             const errorMessage = error.message;
-            console.log(errorCode, errorMessage);
+            console.log('code', errorCode, 'Message', errorMessage);
         });
     };
     const handleGoogleLogin = (e) => {
         e.preventDefault();
-        console.log('logger inn');
         (0, auth_1.signInWithPopup)(auth, provider)
             .then((result) => {
             const credential = auth_1.GoogleAuthProvider.credentialFromResult(result);
@@ -47765,7 +47767,6 @@ const Login = () => {
             }
             // ...
         }).catch((error) => {
-            console.log('feil');
             const errorCode = error.code;
             const errorMessage = error.message;
             console.log(errorCode, errorMessage);
@@ -47777,9 +47778,9 @@ const Login = () => {
         react_1.default.createElement("h1", null, "Welcome back!"),
         react_1.default.createElement("p", null, "Please enter your details."),
         react_1.default.createElement("div", { className: "card" },
-            react_1.default.createElement("form", null,
+            react_1.default.createElement("form", { ref: formRef },
                 react_1.default.createElement("input", { ref: emailRef, type: "text", id: "email", placeholder: "e-mail" }),
-                react_1.default.createElement("input", { ref: passwordRef, type: "password", id: "password", placeholder: "password" }),
+                react_1.default.createElement("input", { className: "login-input", ref: passwordRef, type: "password", id: "password", placeholder: "password" }),
                 react_1.default.createElement("button", { className: "login-btn", onClick: handleLogin }, "Log in"),
                 react_1.default.createElement("span", null, "--------- or ---------"),
                 react_1.default.createElement("button", { className: "login-with-google-btn", onClick: handleGoogleLogin }, "Sign in with google"))),
@@ -47850,22 +47851,28 @@ const SignIn = () => {
         const password2 = (_c = password2Ref.current) === null || _c === void 0 ? void 0 : _c.value;
         const isEmail = email ? validateEmailInput(email) : false;
         const correctPassword = password1 && password2 ? validatePasswordInput(password1, password2) : false;
+        emailRef.current.className = '';
+        password1Ref.current.className = '';
+        password2Ref.current.className = '';
         if (!isEmail) {
             emailRef.current.value = "";
+            emailRef.current.className = 'wrong-input';
             emailRef.current.placeholder = "Invalid e-mail";
         }
-        else if (!password1) {
+        if (!password1) {
+            password1Ref.current.className = 'wrong-input';
             password1Ref.current.placeholder = "Pleace enter a password";
         }
         else if (!password2) {
+            password2Ref.current.className = 'wrong-input';
             password2Ref.current.placeholder = "Pleace enter a password";
         }
         else if (!correctPassword) {
+            password2Ref.current.className = 'wrong-input';
             password2Ref.current.value = "";
             password2Ref.current.placeholder = "Password does not match";
         }
         if (isEmail && correctPassword) {
-            console.log('tiptop');
             (0, auth_1.createUserWithEmailAndPassword)(auth, email, password1)
                 .then((userCredential) => {
                 console.log('signed up');
@@ -47890,7 +47897,6 @@ const SignIn = () => {
                 const token = credential.accessToken;
                 const user = result.user;
             }
-            // ...
         }).catch((error) => {
             console.log('feil');
             const errorCode = error.code;

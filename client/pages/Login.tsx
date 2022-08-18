@@ -9,6 +9,7 @@ const Login: React.FC = () => {
 
     const emailRef = useRef<HTMLInputElement>(null);
     const passwordRef = useRef<HTMLInputElement>(null);
+    const formRef = useRef<HTMLFormElement>(null);
 
     useEffect(() => {
         onAuthStateChanged(auth, (user) => {
@@ -26,17 +27,18 @@ const Login: React.FC = () => {
         signInWithEmailAndPassword(auth, email!, password!)
         .then(userCredential => {
             const user = userCredential.user;
+            formRef.current!.className = '';
         })
-        .catch(error => {
+        .catch(error => { 
+            formRef.current!.className = 'wrong-login';
             const errorCode = error.code;
             const errorMessage = error.message;
-            console.log(errorCode, errorMessage);
+            console.log('code', errorCode, 'Message', errorMessage);
         });
     }
 
     const handleGoogleLogin = (e: React.FormEvent<HTMLInputElement>|React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         e.preventDefault();
-        console.log('logger inn')
         signInWithPopup(auth, provider)
         .then((result) => {
             const credential = GoogleAuthProvider.credentialFromResult(result);
@@ -46,7 +48,6 @@ const Login: React.FC = () => {
             }
             // ...
         }).catch((error) => {
-            console.log('feil')
             const errorCode = error.code;
             const errorMessage = error.message;
             console.log(errorCode, errorMessage);
@@ -60,9 +61,9 @@ const Login: React.FC = () => {
             <h1>Welcome back!</h1>
             <p>Please enter your details.</p>
             <div className="card">
-                <form>
+                <form ref={formRef}>
                     <input ref={emailRef} type="text" id="email" placeholder="e-mail"></input>
-                    <input ref={passwordRef} type="password" id="password" placeholder="password"></input>
+                    <input className="login-input" ref={passwordRef} type="password" id="password" placeholder="password"></input>
                     <button className="login-btn" onClick={handleLogin}>Log in</button>
                     <span>--------- or ---------</span>
                     <button className="login-with-google-btn" onClick={handleGoogleLogin}>Sign in with google</button>

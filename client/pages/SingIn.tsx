@@ -30,21 +30,29 @@ const SignIn: React.FC = () => {
 
         const isEmail = email ? validateEmailInput(email) : false;
         const correctPassword = password1 && password2 ? validatePasswordInput(password1, password2) : false;
+
+        emailRef.current!.className = '';
+        password1Ref.current!.className = '';
+        password2Ref.current!.className = '';
         
         if(!isEmail){
             emailRef.current!.value = "";
+            emailRef.current!.className = 'wrong-input';
             emailRef.current!.placeholder = "Invalid e-mail";
-        } else if(!password1){
+        }
+        if(!password1){
+            password1Ref.current!.className = 'wrong-input';
             password1Ref.current!.placeholder = "Pleace enter a password";
         } else if(!password2) {
+            password2Ref.current!.className = 'wrong-input';
             password2Ref.current!.placeholder = "Pleace enter a password";
         } else if(!correctPassword){
+            password2Ref.current!.className = 'wrong-input';
             password2Ref.current!.value = "";
             password2Ref.current!.placeholder = "Password does not match";
         }
 
         if(isEmail && correctPassword) {
-            console.log('tiptop');
             createUserWithEmailAndPassword(auth, email!, password1!)
                 .then((userCredential) => {
                     console.log('signed up')
@@ -70,7 +78,6 @@ const SignIn: React.FC = () => {
                 const token = credential.accessToken;
                 const user = result.user;
             }
-            // ...
         }).catch((error) => {
             console.log('feil')
             const errorCode = error.code;
