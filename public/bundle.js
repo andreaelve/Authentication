@@ -47877,9 +47877,7 @@ const SignIn = () => {
         if (isEmail && correctPassword) {
             (0, auth_1.createUserWithEmailAndPassword)(auth, email, password1)
                 .then((userCredential) => {
-                console.log('signed up');
                 const user = userCredential.user;
-                console.log('user', user);
                 navigate('/');
             })
                 .catch((error) => {
@@ -47891,16 +47889,14 @@ const SignIn = () => {
     };
     const handleGoogleLogin = (e) => {
         e.preventDefault();
-        console.log('logger inn');
         (0, auth_1.signInWithPopup)(auth, provider)
-            .then((result) => {
+            .then(result => {
             const credential = auth_1.GoogleAuthProvider.credentialFromResult(result);
             if (credential != null) {
                 const token = credential.accessToken;
                 const user = result.user;
             }
-        }).catch((error) => {
-            console.log('feil');
+        }).catch(error => {
             const errorCode = error.code;
             const errorMessage = error.message;
             console.log(errorCode, errorMessage);

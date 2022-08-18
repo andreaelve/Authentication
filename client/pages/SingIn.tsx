@@ -56,9 +56,7 @@ const SignIn: React.FC = () => {
         if(isEmail && correctPassword) {
             createUserWithEmailAndPassword(auth, email!, password1!)
                 .then((userCredential) => {
-                    console.log('signed up')
                     const user = userCredential.user;
-                    console.log('user', user);
                     navigate('/');
                 })
                 .catch((error) => {
@@ -71,16 +69,14 @@ const SignIn: React.FC = () => {
 
     const handleGoogleLogin = (e: React.FormEvent<HTMLInputElement>|React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         e.preventDefault();
-        console.log('logger inn')
         signInWithPopup(auth, provider)
-        .then((result) => {
+        .then(result => {
             const credential = GoogleAuthProvider.credentialFromResult(result);
             if(credential != null){
                 const token = credential.accessToken;
                 const user = result.user;
             }
-        }).catch((error) => {
-            console.log('feil')
+        }).catch(error => {
             const errorCode = error.code;
             const errorMessage = error.message;
             console.log(errorCode, errorMessage);
