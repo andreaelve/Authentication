@@ -26,9 +26,11 @@ const Home: React.FC = () => {
 
     return (
         <main>
-            <h1>Home page!</h1>
-            <button onClick={handleLogout}>Log out</button>
-            <button onClick={handleDelete}>Delete account</button>
+            <iframe src="https://giphy.com/embed/ASd0Ukj0y3qMM" width="480" height="360" frameBorder="0" className="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/the-simpsons-hello-hi-ASd0Ukj0y3qMM"></a></p>
+            <section className="homepage-buttons">
+                <button onClick={handleLogout}>Log out</button>
+                <button onClick={handleDelete}>Delete account</button>
+            </section>
         </main>
     )
 }

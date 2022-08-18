@@ -15,7 +15,6 @@ const Login: React.FC = () => {
         onAuthStateChanged(auth, (user) => {
             if(user) {
                 navigate('/');
-            } else {
             }
         });
     }, [auth]);

@@ -17,6 +17,7 @@ const SignIn: React.FC = () => {
     };
 
     const validatePasswordInput = (pass1: string, pass2: string) => {
+        // TODO: Add actual validation :) 
         if(pass1.length < 1) return false;
         return pass1 === pass2;
     }

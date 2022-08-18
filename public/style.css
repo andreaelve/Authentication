@@ -120,4 +120,14 @@ a {
         0 2px 4px rgba(0, 0, 0, .25),
         0 0 0 3px #c8dafc;
 }
+
+.homepage-buttons {
+    margin-top: 4em;
+}
+
+.homepage-buttons > button {
+    margin: 1em;
+    width: 10em; 
+    padding: 0.5em;
+}
     

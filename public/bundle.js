@@ -47680,9 +47680,12 @@ const Home = () => {
         }
     };
     return (react_1.default.createElement("main", null,
-        react_1.default.createElement("h1", null, "Home page!"),
-        react_1.default.createElement("button", { onClick: handleLogout }, "Log out"),
-        react_1.default.createElement("button", { onClick: handleDelete }, "Delete account")));
+        react_1.default.createElement("iframe", { src: "https://giphy.com/embed/ASd0Ukj0y3qMM", width: "480", height: "360", frameBorder: "0", className: "giphy-embed", allowFullScreen: true }),
+        react_1.default.createElement("p", null,
+            react_1.default.createElement("a", { href: "https://giphy.com/gifs/the-simpsons-hello-hi-ASd0Ukj0y3qMM" })),
+        react_1.default.createElement("section", { className: "homepage-buttons" },
+            react_1.default.createElement("button", { onClick: handleLogout }, "Log out"),
+            react_1.default.createElement("button", { onClick: handleDelete }, "Delete account"))));
 };
 exports["default"] = Home;
 
@@ -47734,8 +47737,6 @@ const Login = () => {
         (0, auth_1.onAuthStateChanged)(auth, (user) => {
             if (user) {
                 navigate('/');
-            }
-            else {
             }
         });
     }, [auth]);
@@ -47839,6 +47840,7 @@ const SignIn = () => {
         return /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(emailInput.toLowerCase());
     };
     const validatePasswordInput = (pass1, pass2) => {
+        // TODO: Add actual validation :) 
         if (pass1.length < 1)
             return false;
         return pass1 === pass2;
