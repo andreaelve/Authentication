@@ -1,8 +1,9 @@
 import React, { useEffect, useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { getAuth, onAuthStateChanged, signInWithEmailAndPassword } from "firebase/auth";
+import { getAuth, onAuthStateChanged, signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 
 const Login: React.FC = () => {
+    const provider = new GoogleAuthProvider();
     const auth = getAuth();
     const navigate = useNavigate();
 
@@ -35,6 +36,27 @@ const Login: React.FC = () => {
         });
     }
 
+    const handleGoogleLogin = (e: React.FormEvent<HTMLInputElement>|React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+        e.preventDefault();
+        console.log('logger inn')
+        signInWithPopup(auth, provider)
+        .then((result) => {
+            const credential = GoogleAuthProvider.credentialFromResult(result);
+            if(credential != null){
+                const token = credential.accessToken;
+                const user = result.user;
+            }
+            // ...
+        }).catch((error) => {
+            console.log('feil')
+            const errorCode = error.code;
+            const errorMessage = error.message;
+            console.log(errorCode, errorMessage);
+            const email = error.customData.email;
+            const credential = GoogleAuthProvider.credentialFromError(error);
+        });
+    }
+
     return (
         <main>
             <h1>Welcome back!</h1>
@@ -45,7 +67,7 @@ const Login: React.FC = () => {
                     <input ref={passwordRef} type="password" id="password" placeholder="password"></input>
                     <button className="login-btn" onClick={handleLogin}>Log in</button>
                     <span>--------- or ---------</span>
-                    <button>Log in with Google (not working)</button>
+                    <button className="login-with-google-btn" onClick={handleGoogleLogin}>Sign in with google</button>
                 </form>
             </div>
             <p className="toggle-link-line">Don't have an account yet? <Link to="/signin">Sign up</Link></p>

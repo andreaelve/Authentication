@@ -47724,6 +47724,7 @@ const react_1 = __importStar(__webpack_require__(/*! react */ "./node_modules/re
 const react_router_dom_1 = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/index.js");
 const auth_1 = __webpack_require__(/*! firebase/auth */ "./node_modules/firebase/auth/dist/index.esm.js");
 const Login = () => {
+    const provider = new auth_1.GoogleAuthProvider();
     const auth = (0, auth_1.getAuth)();
     const navigate = (0, react_router_dom_1.useNavigate)();
     const emailRef = (0, react_1.useRef)(null);
@@ -47754,6 +47755,26 @@ const Login = () => {
             console.log(errorCode, errorMessage);
         });
     };
+    const handleGoogleLogin = (e) => {
+        e.preventDefault();
+        console.log('logger inn');
+        (0, auth_1.signInWithPopup)(auth, provider)
+            .then((result) => {
+            const credential = auth_1.GoogleAuthProvider.credentialFromResult(result);
+            if (credential != null) {
+                const token = credential.accessToken;
+                const user = result.user;
+            }
+            // ...
+        }).catch((error) => {
+            console.log('feil');
+            const errorCode = error.code;
+            const errorMessage = error.message;
+            console.log(errorCode, errorMessage);
+            const email = error.customData.email;
+            const credential = auth_1.GoogleAuthProvider.credentialFromError(error);
+        });
+    };
     return (react_1.default.createElement("main", null,
         react_1.default.createElement("h1", null, "Welcome back!"),
         react_1.default.createElement("p", null, "Please enter your details."),
@@ -47763,7 +47784,7 @@ const Login = () => {
                 react_1.default.createElement("input", { ref: passwordRef, type: "password", id: "password", placeholder: "password" }),
                 react_1.default.createElement("button", { className: "login-btn", onClick: handleLogin }, "Log in"),
                 react_1.default.createElement("span", null, "--------- or ---------"),
-                react_1.default.createElement("button", null, "Log in with Google (not working)"))),
+                react_1.default.createElement("button", { className: "login-with-google-btn", onClick: handleGoogleLogin }, "Sign in with google"))),
         react_1.default.createElement("p", { className: "toggle-link-line" },
             "Don't have an account yet? ",
             react_1.default.createElement(react_router_dom_1.Link, { to: "/signin" }, "Sign up"))));
@@ -47808,6 +47829,7 @@ const react_1 = __importStar(__webpack_require__(/*! react */ "./node_modules/re
 const react_router_dom_1 = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/index.js");
 const auth_1 = __webpack_require__(/*! firebase/auth */ "./node_modules/firebase/auth/dist/index.esm.js");
 const SignIn = () => {
+    const provider = new auth_1.GoogleAuthProvider();
     const auth = (0, auth_1.getAuth)();
     const navigate = (0, react_router_dom_1.useNavigate)();
     const name = (0, react_1.useRef)(null);
@@ -47860,6 +47882,26 @@ const SignIn = () => {
             });
         }
     };
+    const handleGoogleLogin = (e) => {
+        e.preventDefault();
+        console.log('logger inn');
+        (0, auth_1.signInWithPopup)(auth, provider)
+            .then((result) => {
+            const credential = auth_1.GoogleAuthProvider.credentialFromResult(result);
+            if (credential != null) {
+                const token = credential.accessToken;
+                const user = result.user;
+            }
+            // ...
+        }).catch((error) => {
+            console.log('feil');
+            const errorCode = error.code;
+            const errorMessage = error.message;
+            console.log(errorCode, errorMessage);
+            const email = error.customData.email;
+            const credential = auth_1.GoogleAuthProvider.credentialFromError(error);
+        });
+    };
     return (react_1.default.createElement("main", null,
         react_1.default.createElement("h1", null, "Create an account"),
         react_1.default.createElement("p", { className: "details" }, "Please enter your details."),
@@ -47869,9 +47911,8 @@ const SignIn = () => {
                 react_1.default.createElement("input", { ref: emailRef, type: "text", id: "email", placeholder: "e-mail" }),
                 react_1.default.createElement("input", { ref: password1Ref, type: "password", id: "password1", placeholder: "password" }),
                 react_1.default.createElement("input", { ref: password2Ref, type: "password", id: "password2", placeholder: "verify password" }),
-                react_1.default.createElement("button", { className: "signup-btn", onClick: e => handleSignUp(e) }, "Create account"),
                 react_1.default.createElement("span", null, "--------- or ---------"),
-                react_1.default.createElement("button", null, "Sign up with Google (not working)"))),
+                react_1.default.createElement("button", { className: "login-with-google-btn", onClick: handleGoogleLogin }, "Sign up with google"))),
         react_1.default.createElement("p", { className: "toggle-link-line" },
             "Already have an account? ",
             react_1.default.createElement(react_router_dom_1.Link, { to: "/login" }, "Log in"))));

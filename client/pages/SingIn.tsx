@@ -1,8 +1,9 @@
 import React, { useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import { getAuth, createUserWithEmailAndPassword, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 
 const SignIn: React.FC = () => {
+    const provider = new GoogleAuthProvider();
     const auth = getAuth();
     const navigate = useNavigate();
 
@@ -59,6 +60,27 @@ const SignIn: React.FC = () => {
         }
     }
 
+    const handleGoogleLogin = (e: React.FormEvent<HTMLInputElement>|React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+        e.preventDefault();
+        console.log('logger inn')
+        signInWithPopup(auth, provider)
+        .then((result) => {
+            const credential = GoogleAuthProvider.credentialFromResult(result);
+            if(credential != null){
+                const token = credential.accessToken;
+                const user = result.user;
+            }
+            // ...
+        }).catch((error) => {
+            console.log('feil')
+            const errorCode = error.code;
+            const errorMessage = error.message;
+            console.log(errorCode, errorMessage);
+            const email = error.customData.email;
+            const credential = GoogleAuthProvider.credentialFromError(error);
+        });
+    }
+
     return (
             <main>
                 <h1>Create an account</h1>
@@ -69,9 +91,8 @@ const SignIn: React.FC = () => {
                         <input ref={emailRef} type="text" id="email" placeholder="e-mail"></input>
                         <input ref={password1Ref} type="password" id="password1" placeholder="password"></input>
                         <input ref={password2Ref} type="password" id="password2" placeholder="verify password"></input>
-                        <button className="signup-btn" onClick={e => handleSignUp(e)}>Create account</button>
                         <span>--------- or ---------</span>
-                        <button>Sign up with Google (not working)</button>
+                        <button className="login-with-google-btn" onClick={handleGoogleLogin}>Sign up with google</button>
                     </form>
                 </div>
                 <p className="toggle-link-line">Already have an account? <Link to="/login">Log in</Link></p>
