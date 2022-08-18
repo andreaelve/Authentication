@@ -24,12 +24,10 @@ const Login: React.FC = () => {
         const email = emailRef.current?.value;
         const password = passwordRef.current?.value;
         signInWithEmailAndPassword(auth, email!, password!)
-        .then((userCredential) => {
-            console.log('signing in');
+        .then(userCredential => {
             const user = userCredential.user;
-            console.log('logger inn:', user);
         })
-        .catch((error) => {
+        .catch(error => {
             const errorCode = error.code;
             const errorMessage = error.message;
             console.log(errorCode, errorMessage);
