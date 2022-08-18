@@ -47911,6 +47911,7 @@ const SignIn = () => {
                 react_1.default.createElement("input", { ref: emailRef, type: "text", id: "email", placeholder: "e-mail" }),
                 react_1.default.createElement("input", { ref: password1Ref, type: "password", id: "password1", placeholder: "password" }),
                 react_1.default.createElement("input", { ref: password2Ref, type: "password", id: "password2", placeholder: "verify password" }),
+                react_1.default.createElement("button", { className: "signup-btn", onClick: handleSignUp }, "Sign up"),
                 react_1.default.createElement("span", null, "--------- or ---------"),
                 react_1.default.createElement("button", { className: "login-with-google-btn", onClick: handleGoogleLogin }, "Sign up with google"))),
         react_1.default.createElement("p", { className: "toggle-link-line" },

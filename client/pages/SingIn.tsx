@@ -91,6 +91,7 @@ const SignIn: React.FC = () => {
                         <input ref={emailRef} type="text" id="email" placeholder="e-mail"></input>
                         <input ref={password1Ref} type="password" id="password1" placeholder="password"></input>
                         <input ref={password2Ref} type="password" id="password2" placeholder="verify password"></input>
+                        <button className="signup-btn" onClick={handleSignUp}>Sign up</button>
                         <span>--------- or ---------</span>
                         <button className="login-with-google-btn" onClick={handleGoogleLogin}>Sign up with google</button>
                     </form>
