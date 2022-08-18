@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "build:dev": "react-dotenv && tsc --watch --preserveWatchOutput",
-    "start": "react-dotenv && nodemon dist/index.js & webpack -w"
+    "start:dev": "react-dotenv && nodemon dist/index.js & webpack -w",
+    "start": "node dist/index.js",
+    "build": "webpack"
   },
   "keywords": [],
   "author": "",
